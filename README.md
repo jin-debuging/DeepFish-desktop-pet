@@ -1,4 +1,4 @@
-<h1 align="center">DeepFish 大肥鱼桌宠 · cjsqq 改版</h1>
+<h1 align="center">DeepFish 大肥鱼桌宠 · jin-debuging 改版</h1>
 
 <p align="center">让你的 AI 住进桌面上的 Live2D「大肥鱼」：她能汇报Agent的工作简报，有表情动作，待机时会有小动作。<br>陪你专注工作学习、到点催你吃饭睡觉。(本质上接近传统桌宠）</p>
 
@@ -66,7 +66,7 @@
 
 <br>
 
-1. 拉到普通文件夹：`git clone https://github.com/cjsqq/DeepFish-desktop-pet.git "$env:USERPROFILE\大肥鱼插件"`
+1. 拉到普通文件夹：`git clone https://github.com/jin-debuging/DeepFish-desktop-pet.git "$env:USERPROFILE\大肥鱼插件"`
 2. 放好模型（`model\`）和 SDK（`sdk\`）。
 3. 在插件文件夹里运行 `powershell -ExecutionPolicy Bypass -File setup.ps1 -Check`：编译渲染器、桌宠、MCP 接口和托盘控制台，跑测试，再开一个看不见的桌宠自检。
 4. 把 `bin\FishPet.Mcp.exe` 接进 Agent 的 MCP 配置（各家写法见 AGENTS.md 第 6 步），比如 Claude Code：`claude mcp add dafeiyu -s user -- "完整路径\bin\FishPet.Mcp.exe"`。
@@ -218,7 +218,7 @@
 
 - 基础版：[Rockau / DeepFish-desktop-pet](https://github.com/Rockau/DeepFish-desktop-pet)
 - 语音扩展参考：[冰镐人 / DeepFish-voice](https://github.com/ICEAXEMAN/DeepFish-voice)
-- 本改版：cjsqq
+- 本改版：jin-debuging
 - 本改版使用的藤田琴音语音包来源：[BV1odxs6wE5H](https://www.bilibili.com/video/BV1odxs6wE5H/)。语音、模型和 SDK 按各作者的说明自行获取。
 
 ### 模型与 SDK

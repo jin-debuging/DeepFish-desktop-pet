@@ -28,7 +28,7 @@
 **先看插件放的位置**，再查别的。插件要放在普通文件夹里，不能放在 Agent 的沙箱工作区里。有的 Agent 会给自己的工作区打上“低完整性”标签，好让沙箱里的命令能写进去（DeepSeek Harness 就会这样，别的 Agent 这么做也一样）。在这种地方编出来的程序，不管谁启动都以低完整性运行，开不了桌宠，也连不上她。
 
 - 运行 `icacls 插件`，输出里有 `Low Mandatory Level`（或 `S-1-16-4096`）就是放错了地方。把插件文件夹当成工作区打开（比如在 DeepSeek Harness 里直接打开它），也可能被打上这个标签。
-- 放错了，或者是你自己从 GitHub 拉进工作区的：先跟用户说明原因，再在工作区外面重新拉一份，比如 `git clone https://github.com/cjsqq/DeepFish-desktop-pet.git "$env:USERPROFILE\大肥鱼插件"`（用户想放别处就听他的），后面的步骤都在新位置做。别把原来的文件夹挪过去，也别用连权限一起复制的工具（比如 `robocopy /COPYALL`），标签会跟着过去。拉好以后再用 `icacls` 看一遍，没有标签才往下做。
+- 放错了，或者是你自己从 GitHub 拉进工作区的：先跟用户说明原因，再在工作区外面重新拉一份，比如 `git clone https://github.com/jin-debuging/DeepFish-desktop-pet.git "$env:USERPROFILE\大肥鱼插件"`（用户想放别处就听他的），后面的步骤都在新位置做。别把原来的文件夹挪过去，也别用连权限一起复制的工具（比如 `robocopy /COPYALL`），标签会跟着过去。拉好以后再用 `icacls` 看一遍，没有标签才往下做。
 - 你没权限在工作区外面建文件夹、写文件（报拒绝访问，或者你的命令在沙箱里跑）：告诉用户原因，请他把你的权限切到完全访问（DeepSeek Harness 是把权限预设换成 danger-full-access），切完多半要重启你或开个新会话才生效，切好再接着做。之后编译、写配置这些命令都不要放在沙箱里跑。
 
 然后你自己检查电脑，不用问用户：
