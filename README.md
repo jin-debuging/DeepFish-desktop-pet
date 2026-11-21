@@ -1,4 +1,4 @@
-<h1 align="center">DeepFish：给你的 Agent 一具身体</h1>
+<h1 align="center">DeepFish 大肥鱼桌宠 · cjsqq 改版</h1>
 
 <p align="center">让你的 AI 住进桌面上的 Live2D「大肥鱼」：她能汇报Agent的工作简报，有表情动作，待机时会有小动作。<br>陪你专注工作学习、到点催你吃饭睡觉。(本质上接近传统桌宠）</p>
 
@@ -10,7 +10,28 @@
 
 > **授权：** 代码采用 **PolyForm Noncommercial 1.0.0**，个人、学习、研究、公益免费，不能商用。模型和 Live2D SDK 不在本仓库里，各遵各的许可。详见[文末](#授权与署名)。
 
-> **新玩法：陪玩陪看（[Fisheye 分支](https://github.com/Rockau/DeepFish-desktop-pet/tree/Fisheye)）** 让大肥鱼看着你的屏幕，陪你打游戏、看番、刷视频、看网页：看懂画面在发生什么，到了精彩、好笑、翻车的地方自己吐槽一两句，看剧会读字幕跟剧情。截图只在本机显卡上看，不上传。托盘里一个开关就能开关，还能调她话多话少。详见[下面](#陪玩陪看fisheye-分支)。
+> 这是 [Rockau 的 DeepFish](https://github.com/Rockau/DeepFish-desktop-pet) 的个人改版。原版提供了 Live2D 桌宠、Agent 进度气泡、基础触摸、待机动作和生活提醒。本版把关系阶段、演出和台词设置接到了同一套托盘面板里。
+
+## 这个版本增加了什么
+
+### 关系值和触摸反应
+
+- **六个关系阶段**从 −50 到 200 分，分别是反感、初识、磨合、同频、默契和羁绊。「关系设置」里可以直接设置分数，也可以逐阶段配置各互动的加减分、计分限制和回应动作。
+- **摸头、点头部和戳脸各有自己的表演。** 右键抚摸时嘴会慢慢张开，脸红更容易在高关系阶段出现，最高档保留原来的眯眼笑。松手时会结合抚摸时长和关系阶段选反应。低关系时摸久可能惹她生气，高关系时太快松手则可能让她觉得没摸够。
+- **悬停和点击会随关系阶段变化。** 头脸悬停可以从避开、侧目过渡到好奇、害羞和前倾。手、尾巴、身体和脚部各有对应反应。负分阶段以冷淡或嫌弃为主，关系值低于 −40 时待机保持黑脸和单手护胸。低档待机和悬停会减少主动搭话。
+- **把台词编辑放到触摸区域里。** 在「触摸区域与台词」选体型、鼠标按键和判定框，再选关系阶段与回应。可以改区域、设置触发动作、重命名回应、编辑或恢复台词。可调动作支持修改力度、速度、表情和回弹，再直接试演。
+
+### 可分享的表情、动作和小剧场
+
+- **每一栏独立导入和导出。** 在「设置 → 表情、动作与小剧场」展开对应栏，可导出单项或整栏 JSON。导入时校验模型、参数和关键帧，同名条目会另存，导入后可以直接试播。
+- **小剧场可以自己增减。** 输入剧名和分行剧本，按需加入待机演出。每行可组合台词、动作和停留秒数，剧本可以设置临时道具。移除的小剧场可以恢复。
+- **同一份表演包也可以交给自己的 AI。** 已接入的 AI 能查询可用模型参数、导入新表情或关键帧动作、试播以及管理小剧场。格式和最小示例见[分享表演](#分享表情动作和小剧场)。
+
+### 设置、计时和配音
+
+- **托盘首页集中显示关系值和计时。** 其余项目通过下拉菜单展开。计时有倒计时、正计时、定时结束和闹钟四种模式，倒计时可改时长，指定时间用两个框分别调小时和分钟。
+- **语音与对话合在一个面板。** 可选择对话模型、录音转文字、朗读回复和调音量。配音使用藤田琴音，可选择自动、中文或日语。日语朗读需要配套的本地翻译与合成服务，字幕保留原文。对话读出期间会协调互动配音，避免两路同时播放。
+- **陪玩陪看接入原有鱼眼。** 可选配本机 Ollama 视觉模型，从托盘管理陪看和评论频率，并选择一个窗口跟随。桌宠和计时可以独立使用。语音、录音识别和面板里的对话需要另配[语音与对话服务](docs/语音与对话.md)，陪看需要[鱼眼服务](fisheye/README.md)。
 
 ## 开始使用
 
@@ -45,7 +66,7 @@
 
 <br>
 
-1. 拉到普通文件夹：`git clone https://github.com/Rockau/DeepFish-desktop-pet "%USERPROFILE%\大肥鱼插件"`
+1. 拉到普通文件夹：`git clone https://github.com/cjsqq/DeepFish-desktop-pet.git "$env:USERPROFILE\大肥鱼插件"`
 2. 放好模型（`model\`）和 SDK（`sdk\`）。
 3. 在插件文件夹里运行 `powershell -ExecutionPolicy Bypass -File setup.ps1 -Check`：编译渲染器、桌宠、MCP 接口和托盘控制台，跑测试，再开一个看不见的桌宠自检。
 4. 把 `bin\FishPet.Mcp.exe` 接进 Agent 的 MCP 配置（各家写法见 AGENTS.md 第 6 步），比如 Claude Code：`claude mcp add dafeiyu -s user -- "完整路径\bin\FishPet.Mcp.exe"`。
@@ -54,7 +75,10 @@
 
 </details>
 
-## 演示
+## 原版演示
+
+<details>
+<summary>展开原版的演示和功能说明</summary>
 
 <table align="center">
   <tr>
@@ -109,23 +133,19 @@
 
 还有换装、Q 版、小剧场、好几个名字……留给你自己去发现。完整说明见 [功能详解](docs/功能详解.md)。
 
-## 陪玩陪看（Fisheye 分支）
+</details>
 
-想让大肥鱼陪你一起看屏幕？[**Fisheye 分支**](https://github.com/Rockau/DeepFish-desktop-pet/tree/Fisheye) 给她加了一双「鱼眼」：
+## 陪玩陪看
+
+「鱼眼」来自上游 [Fisheye 分支](https://github.com/Rockau/DeepFish-desktop-pet/tree/Fisheye)，本版已包含相关源码，可按需配置。
 
 - **陪你打游戏**：看得懂战局，打得激烈时只喊大事，翻车、翻盘、打完了才吐槽两句。
 - **陪你看番、看剧**：读字幕跟剧情，虐的地方安静陪着，名场面陪你一起叫。
 - **陪你刷视频、看网页**：笑点、槽点随口接一句；你在干活、聊天时基本不出声。
-- **有分寸**：按场景控制说话节奏，没人理她就慢慢少说，摸她一下又热络起来。托盘「更多设置」里一个开关就能开关，还有“话多话少”滑块。
+- **有分寸**：按场景控制说话节奏，没人理她就慢慢少说，摸她一下又热络起来。托盘「设置 → 待机与陪看」里可以开关，还有“话多话少”滑块。
 - **重隐私**：截图只给本机显卡上的视觉模型（Qwen3-VL）看，不落盘、不上传；发给 DeepSeek 写台词的只有文字描述，像密钥的长串会先打码；微信、QQ 这类聊天软件在前面时完全不看。
 
-需要 NVIDIA 显卡（视觉模型约占 8GB 显存，12GB 以上更稳）和一个 DeepSeek API key。想用的话，拉 Fisheye 分支就行：
-
-```
-git clone -b Fisheye https://github.com/Rockau/DeepFish-desktop-pet "%USERPROFILE%\大肥鱼插件"
-```
-
-已经装了 main 的，在插件文件夹里 `git switch Fisheye`，重新运行一次 `setup.ps1`。鱼眼的安装和用法见分支里的 [fisheye/README.md](https://github.com/Rockau/DeepFish-desktop-pet/blob/Fisheye/fisheye/README.md)。
+按 [鱼眼安装与隐私说明](fisheye/README.md) 配置本地视觉模型和可选的文字评论服务。使用联网文字模型时，画面描述可能随提示词发送给所选服务。
 
 ## 平时怎么用
 
@@ -133,7 +153,33 @@ git clone -b Fisheye https://github.com/Rockau/DeepFish-desktop-pet "%USERPROFIL
 
 你的羁绊、记忆、设置只存在你电脑里的本地文件，不上传，也不在仓库里；每个人装好拿到的，都是一条全新的大肥鱼。
 
-**更新**：跟 Agent 说“更新大肥鱼插件”，或者在托盘“更多设置”里点「检查更新」。
+**更新**：跟 Agent 说“更新大肥鱼插件”，或者在托盘「设置」中选择「检查更新」。
+
+### 分享表情、动作和小剧场
+
+在托盘的「设置 → 表情、动作与小剧场」展开对应栏。点「导出」可保存单项或整栏，点「导入」可读取同一模型的 JSON。遇到同名条目会另存一份。小剧场可以直接新增，移除后可恢复。导出的文件只包含表演数据，预设条目引用接收方已安装的模型和动作。
+
+也可以把 JSON 交给已经接入大肥鱼的 AI，请它调用 `performance_library` 的 `import`，按文件的 `category` 选择类别，把完整 JSON 作为 `package` 传入。导入后可在相应栏点击试播，或让 AI 用 `list` 找到条目后调用 `play`。
+
+自己写动作时，可先让 AI 用 `parameters` 查看当前模型的参数 ID。下面是一段会轻轻点头的动作。表情包把 `category` 改为 `expression`，也可以只提供 `parameters` 来维持一个表情。小剧场用 `category: "skit"`，条目写 `name` 和 `script`，每行可写成「台词|动作|秒数」。
+
+```json
+{
+  "version": 1,
+  "category": "action",
+  "model": "大肥鱼",
+  "items": [
+    {
+      "name": "轻轻点头",
+      "seconds": 1.2,
+      "parameters": { "ParamMouthForm": 0.4 },
+      "tracks": {
+        "FaceAngleY": [{ "time": 0, "value": 0 }, { "time": 0.45, "value": -12 }, { "time": 1.2, "value": 0 }]
+      }
+    }
+  ]
+}
+```
 
 ## 文档
 
@@ -170,9 +216,10 @@ git clone -b Fisheye https://github.com/Rockau/DeepFish-desktop-pet "%USERPROFIL
 
 **本仓库修改**
 
-- Rockau
-- 语音版本：https://github.com/ICEAXEMAN/DeepFish-voice
-  由 ICEAXEMAN 基于本项目改进的分支，给大肥鱼加上了日语语音：固定台词有两套预录配音（青春活力 / 冷静沉稳），现编的话还可以接本机 GPT-SoVITS 实时合成。想让她开口说话的，可以去看看。（注意：该版本不装实时语音，只多占 350MB 硬盘；装了GPT-SoVITS进行实时台词和语音生成会占用较高显存，请根据自己情况使用。该版本还处开发中，功能还没定型。）
+- 基础版：[Rockau / DeepFish-desktop-pet](https://github.com/Rockau/DeepFish-desktop-pet)
+- 语音扩展参考：[冰镐人 / DeepFish-voice](https://github.com/ICEAXEMAN/DeepFish-voice)
+- 本改版：cjsqq
+- 本改版使用的藤田琴音语音包来源：[BV1odxs6wE5H](https://www.bilibili.com/video/BV1odxs6wE5H/)。语音、模型和 SDK 按各作者的说明自行获取。
 
 ### 模型与 SDK
 
